@@ -4,8 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"server": "node index.js",
+		"server": "nodemon index.js",
 		"setup-db": "psql -f ./database.sql",
+		"seed-db": "psql -f ./seed.sql",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "",
