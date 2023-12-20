@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 
-const pool = new Pool({
+const db = new Pool({
 	user: 'charlesbishop',
 	password: 'password',
 	host: 'localhost',
@@ -8,4 +8,4 @@ const pool = new Pool({
 	database: 'perntodo',
 });
 
-module.exports = pool;
+module.exports = db;
