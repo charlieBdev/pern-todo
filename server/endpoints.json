@@ -1,0 +1,86 @@
+{
+	"endpoints": [
+		{
+			"method": "GET",
+			"path": "/api",
+			"description": "Get all endpoints"
+		},
+		{
+			"method": "GET",
+			"path": "/api/todos",
+			"description": "Get all todos",
+			"example": "GET /todos",
+			"response": {
+				"status": 200,
+				"body": [
+					{
+						"todo_id": 2,
+						"description": "drink coffee",
+						"complete": false,
+						"date_created": "2023-12-20T13:17:55.683Z",
+						"date_completed": null
+					},
+					{
+						"todo_id": 3,
+						"description": "eat",
+						"complete": false,
+						"date_created": "2023-12-20T13:18:01.596Z",
+						"date_completed": null
+					}
+				]
+			}
+		},
+		{
+			"method": "GET",
+			"path": "/api/todos/:id",
+			"description": "Get a todo by ID",
+			"example": "GET /todos/1",
+			"response": {
+				"status": 200,
+				"body": {
+					"todo_id": 5,
+					"description": "sleep more",
+					"complete": false,
+					"date_created": "2023-12-20T13:33:24.349Z",
+					"date_completed": null
+				}
+			}
+		},
+		{
+			"method": "POST",
+			"path": "/api/todos",
+			"description": "Post a new todo",
+			"example": "POST /todos",
+			"response": {
+				"status": 201,
+				"body": {
+					"todo_id": 8,
+					"description": "pee",
+					"complete": false,
+					"date_created": "2023-12-20T16:39:16.877Z",
+					"date_completed": null
+				}
+			}
+		},
+		{
+			"method": "PUT",
+			"path": "/api/todos/:id",
+			"description": "Update a todo by ID",
+			"example": "PUT /todos/1",
+			"response": {
+				"status": 200,
+				"body": "Todo was updated!"
+			}
+		},
+		{
+			"method": "DELETE",
+			"path": "/api/todos/:id",
+			"description": "Delete a todo by ID",
+			"example": "DELETE /todos/1",
+			"response": {
+				"status": 200,
+				"body": "Todo was deleted!"
+			}
+		}
+	]
+}

@@ -6,7 +6,7 @@ const {
 	addTodo,
 	editTodo,
 	eraseTodo,
-} = require('../models/todos.models');
+} = require('../models/todos.model');
 
 exports.getTodos = async (_, res) => {
 	try {
@@ -36,7 +36,7 @@ exports.postTodo = async (req, res) => {
 	try {
 		const { description } = req.body;
 		const todo = await addTodo(description);
-		res.json(todo);
+		res.status(201).json(todo);
 	} catch (error) {
 		console.error(error.message);
 	}
