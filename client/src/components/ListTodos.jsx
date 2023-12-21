@@ -1,14 +1,47 @@
 import React, { useEffect, useState, Fragment } from 'react';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { formatDate } from '../utils';
+import EditTodo from './EditTodo';
 
-const TodoCard = ({ todo }) => {
+const TodoCard = ({ todo, todos, setTodos }) => {
+	const formattedDate = formatDate(todo.date_created);
+
+	const handleDelete = async (id) => {
+		const confirmDeletion = window.confirm(
+			'Are you sure you want to delete this todo?'
+		);
+
+		if (!confirmDeletion) {
+			return;
+		}
+
+		try {
+			const response = await fetch(`http://localhost:5000/api/todos/${id}`, {
+				method: 'DELETE',
+			});
+			if (response.ok) {
+				setTodos(todos.filter((todo) => todo.todo_id !== id));
+			}
+		} catch (error) {
+			console.error(error.message);
+			alert('Failed to delete todo');
+		}
+	};
+
 	return (
 		<tr>
 			<td>{todo.description}</td>
+			<td>{formattedDate}</td>
 			<td className='text-center'>
-				<button className='btn btn-outline-primary'>Edit</button>
+				<EditTodo todo={todo} />
 			</td>
 			<td className='text-center'>
-				<button className='btn btn-outline-danger'>Delete</button>
+				<button
+					className='btn btn-outline-danger'
+					onClick={() => handleDelete(todo.todo_id)}
+				>
+					<AiOutlineDelete />
+				</button>
 			</td>
 		</tr>
 	);
@@ -16,37 +49,50 @@ const TodoCard = ({ todo }) => {
 
 const ListTodos = () => {
 	const [todos, setTodos] = useState([]);
+	const [loading, setLoading] = useState(true);
+
+	const getTodos = async () => {
+		try {
+			const response = await fetch('http://localhost:5000/api/todos');
+			const data = await response.json();
+			setTodos(data);
+		} catch (error) {
+			console.error(error.message);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	useEffect(() => {
-		const fetchTodos = async () => {
-			try {
-				const response = await fetch('http://localhost:5000/api/todos');
-				const data = await response.json();
-				console.log(data, '<<< data');
-				setTodos(data);
-			} catch (error) {
-				console.error(error.message);
-			}
-		};
-		fetchTodos();
+		getTodos();
 	}, []);
 
 	return (
 		<Fragment>
-			<table class='table table-hover mt-3'>
-				<thead>
-					<tr className='text-center'>
-						<th>Description</th>
-						<th>Edit</th>
-						<th>Delete</th>
-					</tr>
-				</thead>
-				<tbody>
-					{todos.map((todo, index) => (
-						<TodoCard key={todo.todo_id} todo={todo} index={index} />
-					))}
-				</tbody>
-			</table>
+			{loading ? (
+				<p>Loading todos...</p>
+			) : (
+				<table className='table table-hover mt-3'>
+					<thead>
+						<tr className=''>
+							<th>Todo</th>
+							<th>Created</th>
+							<th className='text-center'>Edit</th>
+							<th className='text-center'>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						{todos.map((todo) => (
+							<TodoCard
+								key={todo.todo_id}
+								todo={todo}
+								todos={todos}
+								setTodos={setTodos}
+							/>
+						))}
+					</tbody>
+				</table>
+			)}
 		</Fragment>
 	);
 };

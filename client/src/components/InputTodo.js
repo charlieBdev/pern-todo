@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { IoMdAdd } from 'react-icons/io';
 
 const InputTodo = () => {
 	const [description, setDescription] = useState('');
@@ -8,6 +9,7 @@ const InputTodo = () => {
 		e.preventDefault();
 
 		if (description === '') {
+			alert('Add a todo!');
 			return;
 		}
 
@@ -26,13 +28,13 @@ const InputTodo = () => {
 				throw new Error('Failed to add todo');
 			} else {
 				setDescription('');
-				console.log('Todo added!');
 			}
 
 			// not sure if needed
 			window.location = '/';
 		} catch (error) {
 			console.error(error.message);
+			alert('Failed to add todo');
 		}
 	};
 
@@ -49,7 +51,7 @@ const InputTodo = () => {
 						onChange={(e) => setDescription(e.target.value)}
 					/>
 					<button type='submit' className='btn btn-outline-success'>
-						Add
+						<IoMdAdd />
 					</button>
 				</div>
 			</form>

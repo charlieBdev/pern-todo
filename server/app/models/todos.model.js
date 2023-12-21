@@ -2,7 +2,9 @@ const db = require('../../db/connection');
 
 exports.fetchTodos = async () => {
 	try {
-		const todos = await db.query('SELECT * FROM todo;');
+		const todos = await db.query(
+			'SELECT * FROM todo ORDER BY date_created DESC;'
+		);
 		return todos.rows;
 	} catch (error) {
 		console.error('DB error fetching todos:', error.message);
