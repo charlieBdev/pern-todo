@@ -16,13 +16,17 @@ const InputTodo = () => {
 		try {
 			const body = { description };
 
-			const response = await fetch('http://localhost:5000/api/todos', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(body),
-			});
+			// const response = await fetch('http://localhost:5000/api/todos', {
+			const response = await fetch(
+				'https://perntodo-k667.onrender.com/api/todos',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(body),
+				}
+			);
 
 			if (!response.ok) {
 				throw new Error('Failed to add todo');

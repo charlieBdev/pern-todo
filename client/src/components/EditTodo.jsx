@@ -13,7 +13,8 @@ const EditTodo = ({ todo }) => {
 			try {
 				const body = { description };
 				const response = await fetch(
-					`http://localhost:5000/api/todos/${todo.todo_id}`,
+					// `http://localhost:5000/api/todos/${todo.todo_id}`,
+					`https://perntodo-k667.onrender.com/api/todos/${todo.todo_id}`,
 					{
 						method: 'PUT',
 						headers: {

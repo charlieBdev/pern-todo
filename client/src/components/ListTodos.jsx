@@ -16,9 +16,13 @@ const TodoCard = ({ todo, todos, setTodos }) => {
 		}
 
 		try {
-			const response = await fetch(`http://localhost:5000/api/todos/${id}`, {
-				method: 'DELETE',
-			});
+			// const response = await fetch(`http://localhost:5000/api/todos/${id}`, {
+			const response = await fetch(
+				`https://perntodo-k667.onrender.com/api/todos/${id}`,
+				{
+					method: 'DELETE',
+				}
+			);
 			if (response.ok) {
 				setTodos(todos.filter((todo) => todo.todo_id !== id));
 			}
@@ -53,7 +57,10 @@ const ListTodos = () => {
 
 	const getTodos = async () => {
 		try {
-			const response = await fetch('http://localhost:5000/api/todos');
+			// const response = await fetch('http://localhost:5000/api/todos');
+			const response = await fetch(
+				'https://perntodo-k667.onrender.com/api/todos'
+			);
 			const data = await response.json();
 			setTodos(data);
 		} catch (error) {
