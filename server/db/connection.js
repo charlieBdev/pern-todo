@@ -4,13 +4,13 @@ const ENV = process.env.NODE_ENV || 'development';
 
 const pathToCorrectEnvFile = `${__dirname}/../.env.${ENV}`;
 
-console.log('Loading environment variables from:', pathToCorrectEnvFile);
+// console.log('Loading environment variables from:', pathToCorrectEnvFile);
 
 require('dotenv').config({
 	path: pathToCorrectEnvFile,
 });
 
-console.log(ENV, '<<< ENV from connection');
+// console.log(ENV, '<<< ENV from connection');
 const config = {};
 
 // const db = new Pool({
