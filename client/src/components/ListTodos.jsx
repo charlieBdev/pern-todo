@@ -1,10 +1,10 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
-import { formatDate } from '../utils';
+import { formatTimestamp } from '../utils';
 import EditTodo from './EditTodo';
 
 const TodoCard = ({ todo, todos, setTodos }) => {
-	const formattedDate = formatDate(todo.date_created);
+	const formattedDate = formatTimestamp(todo.date_created);
 
 	const handleDelete = async (id) => {
 		const confirmDeletion = window.confirm(
