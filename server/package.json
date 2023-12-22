@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "listen.js",
 	"scripts": {
-		"server": "nodemon listen.js",
+		"server": "node listen.js",
 		"setup-db": "psql -f ./db/setup.sql",
 		"seed-db": "psql -f ./db/seed.sql",
 		"seed": "node ./db/seed-prod.js",
