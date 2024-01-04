@@ -77,28 +77,33 @@ const ListTodos = () => {
 	return (
 		<Fragment>
 			{loading ? (
-				<p>Loading todos...</p>
+				<div className='d-flex justify-content-center align-items-center h-100'>
+					<p className='mt-3'>... loading todos ...</p>
+				</div>
 			) : (
-				<table className='table table-hover mt-3'>
-					<thead>
-						<tr className=''>
-							<th>Todo</th>
-							<th>Created</th>
-							<th className='text-center'>Edit</th>
-							<th className='text-center'>Delete</th>
-						</tr>
-					</thead>
-					<tbody>
-						{todos.map((todo) => (
-							<TodoCard
-								key={todo.todo_id}
-								todo={todo}
-								todos={todos}
-								setTodos={setTodos}
-							/>
-						))}
-					</tbody>
-				</table>
+				<div className='d-flex flex-column justify-content-center align-items-center h-100'>
+					<p className='mt-3'>{todos.length} todos</p>
+					<table className='table table-hover'>
+						<thead>
+							<tr className=''>
+								<th>Todo</th>
+								<th>Created</th>
+								<th className='text-center'>Edit</th>
+								<th className='text-center'>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							{todos.map((todo) => (
+								<TodoCard
+									key={todo.todo_id}
+									todo={todo}
+									todos={todos}
+									setTodos={setTodos}
+								/>
+							))}
+						</tbody>
+					</table>
+				</div>
 			)}
 		</Fragment>
 	);
